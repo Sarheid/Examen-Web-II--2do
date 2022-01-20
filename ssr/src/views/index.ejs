@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Index</title>
+</head>
+<body class="container">
+    <h1 class="my-3">Consumo del microservicio 1 de Vehiculos de entrada</h1>
+    <a 
+        href="/add"
+        class="btn btn-success"
+    >Agregar</a>
+    <table class="table table-striped">
+        <thead>
+            <th>Placa</th>
+            <th>Conductor</th>
+            <th>Espacio</th>
+            <th>Ticket</th>
+            <th>Fecha entrada</th>
+            <th>Hora entrada</th>
+            <th>Estado</th>
+            <th>Operacion</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <% if (data.length > 0) { %>
+                <% for(let i=0; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= data[i].placa %></td>
+                        <td><%= data[i].nombre %></td>
+                        <td><%= data[i].espacio %></td>
+                        <td><%= data[i].numeroTicket %></td>
+                        <td><%= new Date(data[i].fechaEntrada).toDateString() %></td>
+                        <td><%= new Date(data[i].horaEntrada).toTimeString() %></td>
+                        <td><%= data[i].estado %></td>
+                        <td>
+                            <a 
+                                class="btn btn-warning me-2"
+                                href="/edit/<%= data[i]._id %>"
+                            >Editar</a>
+                            <a 
+                                class="btn btn-danger"
+                                href="/delete/<%= data[i]._id %>"
+                            >Eliminar</a>
+                        </td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+                <tr>
+                    <td colspan="8">
+                        No hay datos Disponibles.
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
